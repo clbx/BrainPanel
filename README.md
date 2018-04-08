@@ -10,3 +10,6 @@ BrainPanel runs off flask and jinja2.
 Python 3.6+
 Flask
 pygal
+
+
+Please run in a virtual enviroment
