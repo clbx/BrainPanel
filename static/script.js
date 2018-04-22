@@ -1,3 +1,5 @@
+
+/*
 function openTab(evt, cityName) {
     // Declare all variables
     var i, tabcontent, tablinks;
@@ -18,3 +20,4 @@ function openTab(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+*/

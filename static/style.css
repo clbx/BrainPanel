@@ -1,62 +1,6 @@
-
-.column {
-   float: left;
-   width: 50%;
+.top-buffer{
+	margin-top:20px;
 }
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.box {
-  background-color: #bbb;
-  margin: 10px 10px 10px 10px;
-  padding: 10px 10px 10px 10px;
-}
-
-.button-panel{
-  background-color: #eeeeee;
-  color: #121212;
-}
-.tab {
-   overflow: hidden;
-   border: 1px solid #ccc;
-   background-color: #f1f1f1;
-}
-
-/* Style the buttons that are used to open the tab content */
-.tab button {
-   background-color: inherit;
-   color: #121212;
-   float: left;
-   border: none;
-   outline: none;
-   cursor: pointer;
-   padding: 14px 16px;
-   transition: 0.3s;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-   background-color: #ddd;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-   background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-   display: none;
-   padding: 6px 12px;
-   border: 1px solid #ccc;
-   border-top: none;
-}
-
-
 
 
  #0d1315

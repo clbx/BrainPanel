@@ -5,100 +5,123 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>BrainPanel</title>
+  <title>BrainPanel</title
   <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
-  <script type="text/javascript" src="http://kozea.github.com/pygal.js/javascripts/svg.jquery.js"></script>
+  <!--
+	<script type="text/javascript" src="http://kozea.github.com/pygal.js/javascripts/svg.jquery.js"></script>
   <script type="text/javascript" src="http://kozea.github.com/pygal.js/javascripts/pygal-tooltips.js"></script>
+	-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
 
 </head>
 <body>
 
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+      <ul class="navbar-nav mr-auto navbar-nav nav" id="myTab" role="tablist">
+				<li class="nav-item">
+		 	  	<a class="nav-link active" id="RealTime" data-toggle="tab" href="#realtime" role="tab" aria-controls="home" aria-selected="true">Load File</a>
+				</li>
+		 	  <li class="nav-item">
+		 	     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#recorded" role="tab" aria-controls="profile" aria-selected="false">Real-Time</a>
+		 	  </li>
+		 	  <li class="nav-item">
+		 	     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#about" role="tab" aria-controls="contact" aria-selected="false">About</a>
+		 	  </li>
+			</ul>
+		</div>
+		<div class="mx-auto order-0">
+			<a class="navbar-brand mx-auto" href="#">🧠 Brain Panel</a>
+		</div>
+		<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+			<ul class="navbar-nav ml-auto">
+				<form class="form-inline">
+    			<button class="btn btn-outline-success" type="button">Upload CSV</button>
+  			</form>
+			</ul>
+		</div>
+	</nav>
 
-  <!-- Tab links -->
-  <b>DUMMY MODE</b>
- <div class="tab">
-   <button class="tablinks" onclick="openTab(event, 'RealTime')">Real-Time</button>
-   <button class="tablinks" onclick="openTab(event, 'LoadFile')">Load-File</button>
-   <button class="tablinks" onclick="openTab(event, 'About')">About</button>
- </div>
 
- <!-- Tab content -->
- <div id="RealTime" class="tabcontent">
-   <br>
-   <div class="row">
-    <div class="column">
-      <embed type="image/svg+xml" src={{chart1|safe}} style='max-width:700px'/>
-    </div>
-    <div class="column">
-      <div class="row box">
-        <h4>Statistics</h4>
-        <b>Times Blinked:</b> {{ blinked }}<br>
-        <b>Sylablles Said</b> {{ said }}<br>
-        <b>Connection Time</b> {{ time }}<br>
-      </div>
-      <div class="row box">
-        <h4>Connection Information</h4>
-        Device Connected: Muse Brainwave Headset<br>
-        Sensors Working: <br>
-        <span style="color: red">█</span>✔ <span style="color: blue">█</span>✔ <span style="color: green">█</span>✔ <span style="color: white">█</span>✖ <span style="color: orange">█</span>✖ <span style="color: purple">█</span>✔
-        <br><br>
-        Battery Percentage: 94%<br>
-        Connected Via: Bluetooth<br>
-      </div>
-      <div class="row box">
-        <br>
-        <button type="button" class="button-panel">Start Recording</button>  <button type="button" class="button-panel">Stop Recording</button><br><br>
-        <button type="button" class="button-panel">Save Results</button><br>
-      </div>
-    </div>
- </div>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="realtime" role="tabpanel" aria-labelledby="RealTime-Tab">
+		<!-- THE FIRST TAB -->
+		<div class="container">
+			<div class="row">
+				<!-- LEFT SIDE -->
+				<div class="col-6">
+					{% for id in ids %}
+        		<div id="{{id}}"></div>
+					{% endfor %}
+				</div>
+				<!-- RIGHT SIDE -->
+				<div class="col-6">
+					<!--- TOP RIGHT-->
+					<br>
+					<div class="row">
+						<div class="card" style="width: 35rem;">
+  						<div class="card-body">
+    						<h5 class="card-title">Statistics</h5>
+    						<p class="card-text">
+									Times Blinked:   {{ total_blinks }}<br>
+									Sylablles Said:  {{ total_syl}}<br>
+									Recorded Time:   {{ total_time}}<br>
+								</p>
+  						</div>
+						</div>
+					</div>
+					<!-- BOTTOM RIGHT -->
+					<br>
+					<div class="row">
+						<div class="card" style="width: 35rem;">
+  						<div class="card-body">
+    						<h5 class="card-title">Information</h5>
+    						<p class="card-text">
+									<div class="alert alert-success" role="alert">
+  									<b>Your Alpha Waves are high:</b> This correlates to heavy thinking
+									</div>
+									<div class="alert alert-success" role="alert">
+  									<b>Your Beta Waves are low:</b> This usually means you're relaxed
+									</div>
+									<div class="alert alert-danger" role="alert">
+  									<b>Your Delta Waves are low:</b> This usually means you need sleep
+									</div>
+								</p>
+  						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  <div class="tab-pane fade" id="recorded" role="tabpanel" aria-labelledby="Recorded-Tab">
+    <!-- THE SECOND TAB -->
+  </div>
+  <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="About-Tab">
+    <!-- THE THIRD TAB -->
+  </div>
 </div>
 
- <div id="LoadFile" class="tabcontent">
-   <br>
-   <div class="row">
-    <div class="column">
-      <embed type="image/svg+xml" src={{chart|safe}} style='max-width:700px'/>
-    </div>
-    <div class="column">
-      <div class="row box">
-        <h4>Statistics</h4>
-        <b>Times Blinked:</b> {{ blinked }}<br>
-        <b>Sylablles Said</b> {{ said }}<br>
-        <b>Recorded Time</b> 5:34<br>
-      </div>
-      <div class="row box">
-        <b>Your Beta waves spiked</b> That usually correlates to stress<br>
-        <b>Your Alpha waves went up</b> That usually means your heart rate increased<br>
-      </div>
-      <div class="row box">
-        <button type="button" class="button-panel">Load File</button>
-      </div>
-    </div>
- </div>
 
- </div>
 
- <div id="About" class="tabcontent">
-   <h3>About</h3>
-   <p>Brain Panel: v0.1</p>
-   This is a beta version of a panel to display Muse Brain wave information a realtime and post-record way<br><br>
-   <b>Real Time Goals:</b>
-   <ul>
-     <li>Have a graph with real-time information from the muse brain sensor.</li>
-     <li>Receive real-time statistics from the muse.</li>
-     <li>Receive information on the device itself</li>
-   </ul>
-   <br>
-   <b>Post-Record Goals:</b>
-   <ul>
-     <li>Display out helpful information about the session</li>
-     <li>Display Statistics about session</li>
-     <li>Display a graph with the information from the session</li>
-   </ul>
-   <br>
- </div>
 
 </body>
+
+<footer>
+	<script type="text/javascript">
+		var graphs = {{graphJSON | safe}};
+		var ids = {{ids | safe}};
+		for(var i in graphs) {
+			Plotly.plot(ids[i], // the ID of the div, created above
+				graphs[i].data,
+				graphs[i].layout || {});
+		}
+	</script>
+</footer>
 </html>
