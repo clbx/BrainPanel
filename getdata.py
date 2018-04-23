@@ -9,7 +9,7 @@ from flask import render_template
 from urllib.request import urlopen
 
 app = Flask(__name__)
-
+ 
 
 # Get the CSV into a 2D array
 # Get the file
@@ -75,7 +75,7 @@ for i in range(len(data))[1:]:
 		gamma.append(gammaTemp)
 
 
-
+'''
 print(timestamps)
 print()
 print(delta)
@@ -86,7 +86,7 @@ print(len(theta))
 print(len(alpha))
 print(len(beta))
 print(len(gamma))
-
+'''
 
 
 

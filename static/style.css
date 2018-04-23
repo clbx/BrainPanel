@@ -1,7 +1,14 @@
 .top-buffer{
 	margin-top:20px;
 }
-
+.emojiheader{
+	font-size: 50px;
+	display: block;
+	margin: 0 auto;
+}
+.titleheader{
+	font-size: 50px;
+}
 
  #0d1315
  #205D50
