@@ -10,6 +10,7 @@ from urllib.request import urlopen
 
 app = Flask(__name__)
 
+
 # Get the CSV into a 2D array
 # Get the file
 filedata = open('HeadMovement.csv', 'r')
@@ -146,8 +147,6 @@ graphs = [
 
 ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
 graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
-
-
 
 
 @app.route('/')
