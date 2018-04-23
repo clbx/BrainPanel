@@ -9,6 +9,14 @@
 .titleheader{
 	font-size: 50px;
 }
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 60%;
+   max-width:1200px;
+  }
+}
+
+
 
  #0d1315
  #205D50

@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>BrainPanel</title
-  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
@@ -18,6 +17,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 <body>
@@ -119,11 +119,9 @@
 								<h5 class="card-title">Current Features</h5>
 								<p class="card-text">
 									<ul>
-										<li>Statistics</li>
+										<li>Statistics & Facts</li>
 										<li>Graphs</li>
-										<li>Facts</li>
 										<li>Deployable Package</li>
-										<li>Good looking panel</li>
 									</ul>
 								</p>
 							</div>
@@ -140,6 +138,7 @@
 								</p>
 							</div>
 						</div>
+						<br>
 						<div class="card" style="width: 35rem;">
 							<div class="card-body">
 								<h5 class="card-title">Bugs:</h5>
@@ -150,6 +149,53 @@
 									</ul>
 								</p>
 							</div>
+						</div>
+						<br>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  						Technical Specifications
+						</button>
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog modal-xl" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Technical Specifications</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        BrainPanel runs off Python 3.6.x
+										<div class="container">
+											<div class="row">
+												<div class="col">
+													Dependancies:
+													<ul>
+														<li>Python 3.6.x</li>
+														<li>Flask 0.12.2+</li>
+														<li>plotly 2.5.1+</li>
+														<li>pandas 0.22.0+</li>
+														<li>numpy 1.14.2+</li>
+
+														<br><br><br>
+														<a href="https://github.com/clbx/BrainPanel">Github Repository</a>
+												</div>
+												<div class="col">
+													<b>To run BrainPanel</b>
+													To run brain panel a python virtual enviroment is <i>required</i><br>
+													After cloning the Repository, start the virtualenv by running <code>source bin/activate</code><br>
+													Flask will now be running on 127.0.0.1:5000<br><br>
+													<b>To deploy BrainPanel</b><br>
+													gunicorn is used to deploy BrainPanel. Set nginx root to proxy from 127.0.0.1:3000 and static to flasks static folder.<br>
+													After configuring nginx, run <br><code>gunicord -w 4 -b 127.0.0.1:3000 getdata:app</code>
+												</div>
+											</div>
+										</div>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						      </div>
+						    </div>
+						  </div>
 						</div>
 					</div>
 			</div>
