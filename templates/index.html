@@ -29,7 +29,7 @@
 		 	  	<a class="nav-link active" id="RealTime" data-toggle="tab" href="#realtime" role="tab" aria-controls="home" aria-selected="true">Home</a>
 				</li>
 		 	  <li class="nav-item">
-		 	     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#recorded" role="tab" aria-controls="profile" aria-selected="false">Graphs</a>
+		 	     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#recorded" role="tab" aria-controls="profile" aria-selected="false">More Information</a>
 		 	  </li>
 		 	  <li class="nav-item">
 		 	     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#about" role="tab" aria-controls="contact" aria-selected="false">About</a>
@@ -60,24 +60,22 @@
 		<div class="container">
 			<div class="row">
 				<!-- LEFT SIDE -->
-				<div class="col-6">
-					{% for id in ids %}
-        		<div id="{{id}}"></div>
-					{% endfor %}
+				<div class="col-7">
+        	<div id="graph-0"></div>
 				</div>
 				<!-- RIGHT SIDE -->
-				<div class="col-6">
+				<div class="col-5">
 					<!--- TOP RIGHT-->
 					<br>
 					<div class="row">
-						<div class="card" style="width: 35rem;">
+						<div class="card" style="width: 30rem;">
   						<div class="card-body">
     						<h5 class="card-title">Quick Statistics</h5>
     						<p class="card-text">
 									Times Blinked:    {{ total_blinks }}<br>
 									Sylablles Said:   {{ total_syl}}<br>
 									Recorded Time:    {{ total_time}}<br>
-									Battery Expended: {{ total_batt }}<br>
+									Battery Expended: {{ total_batt }} %<br>
 								</p>
   						</div>
 						</div>
@@ -85,7 +83,7 @@
 					<!-- BOTTOM RIGHT -->
 					<br>
 					<div class="row">
-						<div class="card" style="width: 35rem;">
+						<div class="card" style="width: 30rem;">
   						<div class="card-body">
     						<h5 class="card-title">Information</h5>
     						<p class="card-text">
@@ -117,7 +115,8 @@
     <div class="container">
 			<div class="row">
 				<div class="column">
-					<div class="card" style="width: 35rem;">
+					<br><br>
+					<div class="card" style="width: 25rem;">
 						<div class="card-body">
 							<h5 class="card-title">More Statistics</h5>
 							<p class="card-text">
@@ -141,7 +140,6 @@
 										<th>Y Average: {{yAvg}}</th>
 										<th>Z Average: {{zAvg}}</th>
 									</tr>
-
 								</table>
 							</p>
 						</div>
@@ -149,9 +147,7 @@
 				</div>
 
 				<div class="column">
-					{% for acclid in acclids %}
-        		<div id="{{acclid}}"></div>
-					{% endfor %}
+					<div id="graph-1"></div>
 				</div>
 			</div>
 			<div class="row">
@@ -263,9 +259,6 @@
   </div>
 </div>
 
-
-
-
 </body>
 
 <footer>
@@ -277,6 +270,8 @@
 				graphs[i].data,
 				graphs[i].layout || {});
 		}
+		console.log(ids);
+		console.log(graphs);
 	</script>
 </footer>
 </html>

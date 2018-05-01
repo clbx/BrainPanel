@@ -16,7 +16,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 '''
-
+.
 yes i know my code is nasty
 
 '''
@@ -52,14 +52,24 @@ def data_view():
 	prefix = "/muse/elements/"
 	total_blinks = 0
 	total_syl = 0
+	battery = []
 	for i in range(len(data)):
 		if len(data[i]) == 39:    #Nessessary to prevent the OOB created by lists
 			if data[i][38] == prefix + "blink":
 				total_blinks += 1
 			if data[i][38] == prefix + "jaw_clench":
 				total_syl += 1
+	for i in range(len(data))[1:]:
+		if data[i][37] != "":
+			battery.append(float(data[i][37]))
 	print("Total Blinks: "+str(total_blinks))
 	print("Total Syl: "+ str(total_syl))
+
+
+	battMax = max(battery)
+
+	battMin = min(battery)
+	total_batt = round(battMax - battMin,4)
 
 	#Now for graph stuff
 	#Initilze our lists
@@ -72,6 +82,7 @@ def data_view():
 	accX = []
 	accY = []
 	accZ = []
+
 
 	#print(data[1][1])
 
@@ -216,22 +227,18 @@ def data_view():
 	graphs = [
 		dict(
 			data=[thetaGraph, deltaGraph, alphaGraph, betaGraph,gammaGraph ],
-
 			layout=dict(
 				title='Brain Data'
 			)
 		),
-	]
-
-	accelGraphs = [
 		dict(
 			data=[xGraph,yGraph,zGraph],
-
 			layout=dict(
 				title='Accelerometer Data'
 			)
 		),
 	]
+
 
 
 	accelMax = 10;
@@ -309,7 +316,11 @@ def data_view():
 	ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
 	graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
 
-	return render_template('index.html', title='Home',alertMatrix=alertMatrix, ids=ids, graphJSON=graphJSON,total_syl=total_syl, total_blinks=total_blinks, deltaAvg=deltaAvg, thetaAvg=thetaAvg, gammaAvg=gammaAvg, betaAvg=betaAvg, alphaAvg=alphaAvg, xAvg=xAvg, yAvg=yAvg,zAvg=zAvg)
+
+	print(ids)
+	print(ids[0])
+
+	return render_template('index.html', title='Home',alertMatrix=alertMatrix, ids=ids, graphJSON=graphJSON,total_syl=total_syl, total_blinks=total_blinks, total_batt=total_batt,deltaAvg=deltaAvg, thetaAvg=thetaAvg, gammaAvg=gammaAvg, betaAvg=betaAvg, alphaAvg=alphaAvg, xAvg=xAvg, yAvg=yAvg,zAvg=zAvg)
 
 
 if __name__ == "__main__":
