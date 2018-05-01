@@ -26,10 +26,10 @@
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
       <ul class="navbar-nav mr-auto navbar-nav nav" id="myTab" role="tablist">
 				<li class="nav-item">
-		 	  	<a class="nav-link active" id="RealTime" data-toggle="tab" href="#realtime" role="tab" aria-controls="home" aria-selected="true">Load File</a>
+		 	  	<a class="nav-link active" id="RealTime" data-toggle="tab" href="#realtime" role="tab" aria-controls="home" aria-selected="true">Home</a>
 				</li>
 		 	  <li class="nav-item">
-		 	     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#recorded" role="tab" aria-controls="profile" aria-selected="false">Real-Time</a>
+		 	     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#recorded" role="tab" aria-controls="profile" aria-selected="false">Graphs</a>
 		 	  </li>
 		 	  <li class="nav-item">
 		 	     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#about" role="tab" aria-controls="contact" aria-selected="false">About</a>
@@ -41,13 +41,18 @@
 		</div>
 		<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 			<ul class="navbar-nav ml-auto">
-				<form class="form-inline">
-    			<button class="btn btn-outline-success" type="button">Upload CSV</button>
-  			</form>
+				<form action="/data" method=post class="form-inline" enctype=multipart/form-data>
+      		<p><input class="btn btn-outline-success" type=file name=data_file>
+					<input class="btn btn-outline-success" type=submit value=Upload>
+    		</form>
+				<!--
+				<form class="form-inline method=post enctype=multipart/form-data">
+					<p><input class="btn btn-outline-success" type=file name=file>
+			 		<input class="btn btn-outline-success" type=submit value=Upload>
+  			</form>-->
 			</ul>
 		</div>
 	</nav>
-
 
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="realtime" role="tabpanel" aria-labelledby="RealTime-Tab">
@@ -67,12 +72,12 @@
 					<div class="row">
 						<div class="card" style="width: 35rem;">
   						<div class="card-body">
-    						<h5 class="card-title">Statistics</h5>
+    						<h5 class="card-title">Quick Statistics</h5>
     						<p class="card-text">
 									Times Blinked:    {{ total_blinks }}<br>
 									Sylablles Said:   {{ total_syl}}<br>
 									Recorded Time:    {{ total_time}}<br>
-									<!--Battery Expended: {{ total_batt }}<br>-->
+									Battery Expended: {{ total_batt }}<br>
 								</p>
   						</div>
 						</div>
@@ -102,7 +107,55 @@
 		</div>
 	</div>
   <div class="tab-pane fade" id="recorded" role="tabpanel" aria-labelledby="Recorded-Tab">
-    <!-- THE SECOND TAB -->
+    <div class="container">
+			<div class="row">
+				<div class="column">
+					<div class="card" style="width: 35rem;">
+						<div class="card-body">
+							<h5 class="card-title">More Statistics</h5>
+							<p class="card-text">
+								<table width="100%">
+									<tr>
+										<th>Alpha avg: {{alphaAvg}} db</th>
+										<th>Beta avg: {{betaAvg}} db</th>
+									</tr>
+									<tr>
+										<th>Delta avg: {{deltaAvg}} db</th>
+										<th>Gamma avg: {{gammaAvg}} db</th>
+									</tr>
+									<tr>
+										<th>Theta avg: {{thetaAvg}} db</th>
+									</tr>
+									<tr>
+										<th> </th>
+									</tr>
+									<tr>
+										<th>X Average: {{xAvg}}</th>
+										<th>Y Average: {{yAvg}}</th>
+										<th>Z Average: {{zAvg}}</th>
+									</tr>
+
+								</table>
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="column">
+					{% for acclid in acclids %}
+        		<div id="{{acclid}}"></div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="row">
+				<div class="column">
+					<!-- COLUMN BOTTOM LEFT -->
+				</div>
+				<div class="column">
+					<!-- COLUMN BOTTOM RIGHT -->
+				</div>
+			</div>
+		</div>
   </div>
   <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="About-Tab">
     <div class="container">
