@@ -3,7 +3,7 @@
 BrainPanel is a front-end panel that displays information received from the output of a Muse Brain sensor.
 
 
-![screenshot]("https://i.imgur.com/K5oWtb9.png")
+![screenshot](https://i.imgur.com/K5oWtb9.png)
 
 
 #####Program Dependencies
