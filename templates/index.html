@@ -89,6 +89,12 @@
   						<div class="card-body">
     						<h5 class="card-title">Information</h5>
     						<p class="card-text">
+									{% for item in alertMatrix %}
+										<div class="alert alert-{{item[0]}}" role="alert">
+  										<b>{{item[1]}}</b> {{item[2]}}
+										</div>
+									{% endfor %}
+									<!--
 									<div class="alert alert-success" role="alert">
   									<b>Your Delta Waves are high:</b> This correlates to relaxation
 									</div>
@@ -98,6 +104,7 @@
 									<div class="alert alert-danger" role="alert">
   									<b>You Moved Around a Lot:</b> If you move your head too much, it can lead to innaccurate readings
 									</div>
+								-->
 								</p>
   						</div>
 						</div>

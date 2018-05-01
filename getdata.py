@@ -28,15 +28,6 @@ def getAvg(wave):
 	avg = total/len(wave)
 	return avg
 
-	class alert(object):
-		def __init__(self, type, title,message):
-				self.title = title
-				self.message = message
-				self.type = type
-
-
-def data(text_file_contents):
-	return text_file_contents.replace("=", ",")
 
 @app.route('/')
 def index():
@@ -250,14 +241,75 @@ def data_view():
 	'''
 	Types:
 	sucess = green
-	danger = yellow
-	warning = red
+	warning = yellow
+	danger = red
 	'''
+
+	# This part is super nasty, I know. Awful, but it's a workaround
+
+	alertMatrix = []
+	alertMatrix.append([])
+	alertMatrix.append([])
+	alertMatrix.append([])
+
+	if(current < alertmax and accelAvg > accelMax):
+		alertMatrix[current].append(str("danger"))
+		alertMatrix[current].append(str("You're Moving too Much"))
+		alertMatrix[current].append(str("Try to keep still to get the best results"))
+		current += 1
+
+	if(current < alertmax and alphaAvg > 1):
+		alertMatrix[current].append(str("sucess"))
+		alertMatrix[current].append(str("Your Alpha Waves are High"))
+		alertMatrix[current].append(str("This means you are physically and mentally aware"))
+		current += 1
+	if(current < alertmax and alphaAvg < 0):
+		alertMatrix[current].append(str("success"))
+		alertMatrix[current].append(str("Your Alpha Waves are Low"))
+		alertMatrix[current].append(str("This means you're out of it"))
+		current += 1
+
+	if(current < alertmax and betaAvg > 1):
+		alertMatrix[current].append(str("sucess"))
+		alertMatrix[current].append(str("Your Beta Waves are High"))
+		alertMatrix[current].append(str("This means you are alert, attentive, and engaged in activity"))
+		current+= 1
+	if(current < alertmax and betaAvg < 0):
+		alertMatrix[current].append(str("success"))
+		alertMatrix[current].append(str("Your Beta Waves are Low"))
+		alertMatrix[current].append(str("This means you are out of it"))
+		current+= 1
+
+	if(current < alertmax and deltaAvg > 1):
+		alertMatrix[current].append(str("success"))
+		alertMatrix[current].append(str("Your Delta Waves are High"))
+		alertMatrix[current].append(str("This means you are relaxed"))
+		current+= 1
+
+	if(current < alertmax and gammaAvg > 1):
+		alertMatrix[current].append(str("success"))
+		alertMatrix[current].append(str("Your Gamma Waves are High"))
+		alertMatrix[current].append(str("This means that your brain is working hard!"))
+		current+= 1
+	if(current < alertmax and gammaAvg < 0):
+		alertMatrix[current].append(str("success"))
+		alertMatrix[current].append(str("Your Gamma Waves are low"))
+		alertMatrix[current].append(str("This can many many different things"))
+		current+= 1
+
+	if(current < alertmax and thetaAvg > 1):
+		alertMatrix[current].append(str("success"))
+		alertMatrix[current].append(str("Your Theta Waves are high"))
+		alertMatrix[current].append(str("You're sleepy arn't you"))
+		current+= 1
+
+
+
 
 	ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
 	graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
 
-	return render_template('index.html', title='Home',alerts=alerts, ids=ids, graphJSON=graphJSON,total_syl=total_syl, total_blinks=total_blinks, deltaAvg=deltaAvg, thetaAvg=thetaAvg, gammaAvg=gammaAvg, betaAvg=betaAvg, alphaAvg=alphaAvg, xAvg=xAvg, yAvg=yAvg,zAvg=zAvg)
+	return render_template('index.html', title='Home',alertMatrix=alertMatrix, ids=ids, graphJSON=graphJSON,total_syl=total_syl, total_blinks=total_blinks, deltaAvg=deltaAvg, thetaAvg=thetaAvg, gammaAvg=gammaAvg, betaAvg=betaAvg, alphaAvg=alphaAvg, xAvg=xAvg, yAvg=yAvg,zAvg=zAvg)
 
 
 if __name__ == "__main__":
