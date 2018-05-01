@@ -84,6 +84,33 @@ def data_view():
 	accZ = []
 
 
+	dTP9 = []
+	dAF7 = []
+	dAF8 = []
+	dTP10 = []
+
+	tTP9 = []
+	tAF7 = []
+	tAF8 = []
+	tTP10 = []
+
+	aTP9 = []
+	aAF7 = []
+	aAF8 = []
+	aTP10 = []
+
+	bTP9 = []
+	bAF7 = []
+	bAF8 = []
+	bTP10 = []
+
+	gTP9 = []
+	gAF7 = []
+	gAF8 = []
+	gTP10 = []
+
+
+
 	#print(data[1][1])
 
 	#Now get it
@@ -95,22 +122,42 @@ def data_view():
 			timestamps.append(timestampsTemp)
 		#Delta
 		if data[i][1] != "":
+			dTP9.append(float(data[i][1]))
+			dAF7.append(float(data[i][2]))
+			dAF8.append(float(data[i][3]))
+			dTP10.append(float(data[i][4]))
 			deltaTemp = (float(data[i][1])+float(data[i][2])+float(data[i][3])+float(data[i][4]))/4
 			delta.append(deltaTemp)
 		#Theta
 		if data[i][5] != "":
+			tTP9.append(float(data[i][5]))
+			tAF7.append(float(data[i][6]))
+			tAF8.append(float(data[i][7]))
+			tTP10.append(float(data[i][8]))
 			thetaTemp = (float(data[i][5])+float(data[i][6])+float(data[i][7])+float(data[i][8]))/4
 			theta.append(thetaTemp)
 		#Alpha
 		if data[i][9] != "":
+			aTP9.append(float(data[i][9]))
+			aAF7.append(float(data[i][10]))
+			aAF8.append(float(data[i][11]))
+			aTP10.append(float(data[i][12]))
 			alphaTemp = (float(data[i][9])+float(data[i][10])+float(data[i][11])+float(data[i][12]))/4
 			alpha.append(alphaTemp)
 		#Beta
 		if data[i][13] != "":
+			bTP9.append(float(data[i][13]))
+			bAF7.append(float(data[i][14]))
+			bAF8.append(float(data[i][15]))
+			bTP10.append(float(data[i][16]))
 			betaTemp = (float(data[i][13])+float(data[i][14])+float(data[i][15])+float(data[i][16]))/4
 			beta.append(betaTemp)
 		#Gamma
 		if data[i][17] != "":
+			gTP9.append(float(data[i][17]))
+			gAF7.append(float(data[i][18]))
+			gAF8.append(float(data[i][19]))
+			gTP10.append(float(data[i][20]))
 			gammaTemp = (float(data[i][17])+float(data[i][18])+float(data[i][19])+float(data[i][20]))/4
 			gamma.append(gammaTemp)
 		if data[i][28] != "":
@@ -134,6 +181,7 @@ def data_view():
 	print(len(beta))
 	print(len(gamma))
 	'''
+
 
 	deltaAvg = round(getAvg(delta),3)
 	thetaAvg = round(getAvg(theta),3)
@@ -224,6 +272,173 @@ def data_view():
 	)
 
 
+	dTP9g = go.Scatter(
+		x = timestamps,
+		y = dTP9,
+		name = "Delta TP9",
+		line = dict(
+			color = ('rgb(205, 12, 24)'),
+			width = 4)
+	)
+	dAF7g = go.Scatter(
+		x = timestamps,
+		y = dAF7,
+		name = "Delta AF7",
+		line = dict(
+			color = ('rgb(22,96,167)'),
+			width = 4)
+	)
+	dAF8g = go.Scatter(
+		x = timestamps,
+		y = dAF8,
+		name = "Delta AF8",
+		line = dict(
+			color = ('rgb(156,12,203)'),
+			width = 4)
+	)
+	dTP10g = go.Scatter(
+		x = timestamps,
+		y = dTP10,
+		name = "Delta TP10",
+		line = dict(
+			color = ('rgb(45,198,22)'),
+			width = 4)
+	)
+
+	aTP9g = go.Scatter(
+		x = timestamps,
+		y = aTP9,
+		name = "Alpha TP9",
+		line = dict(
+			color = ('rgb(205, 12, 24)'),
+			width = 4)
+	)
+	aAF7g = go.Scatter(
+		x = timestamps,
+		y = aAF7,
+		name = "Alpha AF7",
+		line = dict(
+			color = ('rgb(22,96,167)'),
+			width = 4)
+	)
+	aAF8g = go.Scatter(
+		x = timestamps,
+		y = aAF8,
+		name = "Alpha AF8",
+		line = dict(
+			color = ('rgb(156,12,203)'),
+			width = 4)
+	)
+	aTP10g = go.Scatter(
+		x = timestamps,
+		y = aTP10,
+		name = "Alpha TP10",
+		line = dict(
+			color = ('rgb(45,198,22)'),
+			width = 4)
+	)
+
+	bTP9g = go.Scatter(
+		x = timestamps,
+		y = bTP9,
+		name = "Beta TP9",
+		line = dict(
+			color = ('rgb(205, 12, 24)'),
+			width = 4)
+	)
+	bAF7g = go.Scatter(
+		x = timestamps,
+		y = bAF7,
+		name = "Beta AF7",
+		line = dict(
+			color = ('rgb(22,96,167)'),
+			width = 4)
+	)
+	bAF8g = go.Scatter(
+		x = timestamps,
+		y = bAF8,
+		name = "Beta AF8",
+		line = dict(
+			color = ('rgb(156,12,203)'),
+			width = 4)
+	)
+	bTP10g = go.Scatter(
+		x = timestamps,
+		y = bTP10,
+		name = "Beta TP10",
+		line = dict(
+			color = ('rgb(45,198,22)'),
+			width = 4)
+	)
+
+	gTP9g = go.Scatter(
+		x = timestamps,
+		y = gTP9,
+		name = "Gamma TP9",
+		line = dict(
+			color = ('rgb(205, 12, 24)'),
+			width = 4)
+	)
+	gAF7g = go.Scatter(
+		x = timestamps,
+		y = gAF7,
+		name = "Gamma AF7",
+		line = dict(
+			color = ('rgb(22,96,167)'),
+			width = 4)
+	)
+	gAF8g = go.Scatter(
+		x = timestamps,
+		y = gAF8,
+		name = "Gamma AF8",
+		line = dict(
+			color = ('rgb(156,12,203)'),
+			width = 4)
+	)
+	gTP10g = go.Scatter(
+		x = timestamps,
+		y = gTP10,
+		name = "Gamma TP10",
+		line = dict(
+			color = ('rgb(45,198,22)'),
+			width = 4)
+	)
+
+	tTP9g = go.Scatter(
+		x = timestamps,
+		y = tTP9,
+		name = "Theta TP9",
+		line = dict(
+			color = ('rgb(205, 12, 24)'),
+			width = 4)
+	)
+	tAF7g = go.Scatter(
+		x = timestamps,
+		y = tAF7,
+		name = "Theta AF7",
+		line = dict(
+			color = ('rgb(22,96,167)'),
+			width = 4)
+	)
+	tAF8g = go.Scatter(
+		x = timestamps,
+		y = tAF8,
+		name = "Theta AF8",
+		line = dict(
+			color = ('rgb(156,12,203)'),
+			width = 4)
+	)
+	tTP10g = go.Scatter(
+		x = timestamps,
+		y = tTP10,
+		name = "Theta TP10",
+		line = dict(
+			color = ('rgb(45,198,22)'),
+			width = 4)
+	)
+
+
+
 	graphs = [
 		dict(
 			data=[thetaGraph, deltaGraph, alphaGraph, betaGraph,gammaGraph ],
@@ -235,6 +450,36 @@ def data_view():
 			data=[xGraph,yGraph,zGraph],
 			layout=dict(
 				title='Accelerometer Data'
+			)
+		),
+		dict(
+			data=[aTP9g,aAF7g,aAF8g,aTP10g],
+			layout=dict(
+				title='Alpha Brianwaves'
+			)
+		),
+		dict(
+			data=[bTP9g,bAF7g,bAF8g,bTP10g],
+			layout=dict(
+				title='Beta Brianwaves'
+			)
+		),
+		dict(
+			data=[dTP9g,dAF7g,dAF8g,dTP10g],
+			layout=dict(
+				title='Delta Brianwaves'
+			)
+		),
+		dict(
+			data=[gTP9g,gAF7g,gAF8g,gTP10g],
+			layout=dict(
+				title='Gamma Brianwaves'
+			)
+		),
+		dict(
+			data=[tTP9g,tAF7g,tAF8g,tTP10g],
+			layout=dict(
+				title='Theta Brianwaves'
 			)
 		),
 	]

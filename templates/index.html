@@ -19,6 +19,15 @@
 	<script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
 	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 
+	<style>
+	@media (min-width: 768px) {
+		.modal-xl {
+			width: 60%;
+ 			max-width:1200px;
+		}
+	}
+	</style>
+
 </head>
 <body>
 
@@ -74,7 +83,6 @@
     						<p class="card-text">
 									Times Blinked:    {{ total_blinks }}<br>
 									Sylablles Said:   {{ total_syl}}<br>
-									Recorded Time:    {{ total_time}}<br>
 									Battery Expended: {{ total_batt }} %<br>
 								</p>
   						</div>
@@ -115,51 +123,38 @@
     <div class="container">
 			<div class="row">
 				<div class="column">
-					<br><br>
-					<div class="card" style="width: 25rem;">
-						<div class="card-body">
-							<h5 class="card-title">More Statistics</h5>
-							<p class="card-text">
-								<table width="100%">
-									<tr>
-										<th>Alpha avg: {{alphaAvg}} db</th>
-										<th>Beta avg: {{betaAvg}} db</th>
-									</tr>
-									<tr>
-										<th>Delta avg: {{deltaAvg}} db</th>
-										<th>Gamma avg: {{gammaAvg}} db</th>
-									</tr>
-									<tr>
-										<th>Theta avg: {{thetaAvg}} db</th>
-									</tr>
-									<tr>
-										<th> </th>
-									</tr>
-									<tr>
-										<th>X Average: {{xAvg}}</th>
-										<th>Y Average: {{yAvg}}</th>
-										<th>Z Average: {{zAvg}}</th>
-									</tr>
-								</table>
-							</p>
-						</div>
-					</div>
+					<!-- LEFT SIDE -->
+					<br>
+					<div class="card" style="width: 18rem;">
+  					<div class="card-header">
+    					Wave Averages
+  				</div>
+  				<ul class="list-group list-group-flush">
+    				<li class="list-group-item">Alpha: {{ alphaAvg }}db <button type="button" class="btn-xs btn-info" data-toggle="modal" data-target="#alphaModal" style="float: right">More</button></li>
+						<li class="list-group-item">Beta: {{ betaAvg }}db<button type="button" class="btn-xs btn-info" data-toggle="modal" data-target="#betaModal" style="float: right">More</button></li>
+						<li class="list-group-item">Delta: {{ deltaAvg }}db<button type="button" class="btn-xs btn-info" data-toggle="modal" data-target="#deltaModal" style="float: right">More</button></li>
+						<li class="list-group-item">Theta: {{thetaAvg }}db<button type="button" class="btn-xs btn-info" data-toggle="modal" data-target="#thetaModal" style="float: right">More</button></li>
+						<li class="list-group-item">Gamma: {{gammaAvg }}db<button type="button" class="btn-xs btn-info" data-toggle="modal" data-target="#gammaModal" style="float: right">More</button></li>
+  				</ul>
 				</div>
-
+				<br>
+				<div class="card" style="width: 18rem;">
+					<div class="card-header">
+						Accelerometer Avg.
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">X: {{ xAvg }} </li>
+					<li class="list-group-item">Y: {{ yAvg }}</li>
+					<li class="list-group-item">Z: {{ zAvg }}</li>
+				</ul>
+				</div>
+				</div>
 				<div class="column">
 					<div id="graph-1"></div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="column">
-					<!-- COLUMN BOTTOM LEFT -->
-				</div>
-				<div class="column">
-					<!-- COLUMN BOTTOM RIGHT -->
-				</div>
-			</div>
-		</div>
-  </div>
+  	</div>
+	</div>
   <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="About-Tab">
     <div class="container">
 			<div class="row">
@@ -172,41 +167,16 @@
 						<br>
 						<div class="card" style="width: 35rem;">
 							<div class="card-body">
-								<h5 class="card-title">Current Features</h5>
+								<h5 class="card-title">About</h5>
 								<p class="card-text">
-									<ul>
-										<li>Statistics & Facts</li>
-										<li>Graphs</li>
-										<li>Deployable Package</li>
-									</ul>
+									Brain Panel is a deployable web-based panel that can read information from a muse brainwave sensor.<br><br>
+									BrainPanel is help under the MIT License and is Open Source in every fashion<br>
+									<br><br><br>
+									Written By Clay Buxton (<a href="clbx.io">clbx.io</a>) - 2018
 								</p>
 							</div>
 						</div>
-						<br>
-						<div class="card" style="width: 35rem;">
-							<div class="card-body">
-								<h5 class="card-title">To Do:</h5>
-								<p class="card-text">
-									<ul>
-										<li>Real-Time (May be difficult to implement)</li>
-										<li>Loading uploaded CSV</li>
-									</ul>
-								</p>
-							</div>
-						</div>
-						<br>
-						<div class="card" style="width: 35rem;">
-							<div class="card-body">
-								<h5 class="card-title">Bugs:</h5>
-								<p class="card-text">
-									<ul>
-										<li>Timings do not always show up</li>
-										<li>Facts can be off or go off screen</li>
-									</ul>
-								</p>
-							</div>
-						</div>
-						<br>
+						<br><br>
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   						Technical Specifications
 						</button>
@@ -256,6 +226,103 @@
 					</div>
 			</div>
 		</div>
+  </div>
+</div>
+
+<!-- MODALS FOR INFO -->
+<div class="modal fade" id="alphaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Alpha Waves</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<div id="graph-2"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="betaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Beta Waves</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<div id="graph-3"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deltaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delta Waves</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<div id="graph-4"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="gammaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Gamma Waves</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<div id="graph-5"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="thetaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Theta Waves</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<div id="graph-6"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>
 
