@@ -6,7 +6,7 @@ BrainPanel is a front-end panel that displays information received from the outp
 ![screenshot](https://i.imgur.com/K5oWtb9.png)
 
 
-#####Program Dependencies
+##### Dependencies
 * Python 3.6.x
 * Flask 0.12.2+
 * Plotly 2.5.1+
